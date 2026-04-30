@@ -413,6 +413,21 @@ export function useLiveSession(): UseLiveSessionResult {
     setIsMicOn(false);
     setMicLevel(0);
     setStatus('thinking');
+
+    // Explicitly mark end of the audio stream so the server commits the
+    // buffered audio as a complete turn IMMEDIATELY, rather than waiting
+    // for VAD's silence-detection threshold (~700 ms by default).
+    // This kills the perceived lag when the user releases the button
+    // quickly after their last word.
+    const session = sessionRef.current;
+    if (session) {
+      try {
+        session.sendRealtimeInput({ audioStreamEnd: true });
+      } catch (err) {
+        console.warn('[Oki] audioStreamEnd send failed:', err);
+      }
+    }
+
     if (autoStopTimerRef.current != null) {
       clearTimeout(autoStopTimerRef.current);
       autoStopTimerRef.current = null;
