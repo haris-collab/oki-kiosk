@@ -75,11 +75,11 @@ export function useLiveSession(): UseLiveSessionResult {
   const [lastOkiText, setLastOkiText] = useState('');
   const [isMicOn, setIsMicOn] = useState(false);
 
-  // Vite's define() inlines `process.env.GEMINI_API_KEY` at build time.
+  // Vite natively exposes any env var prefixed with VITE_ via
+  // import.meta.env. No build-config hacks needed — works the same
+  // locally, on Netlify, and on any other host.
   const apiKey = useMemo<string | undefined>(() => {
-    return typeof process !== 'undefined'
-      ? (process.env?.GEMINI_API_KEY as string | undefined)
-      : undefined;
+    return import.meta.env.VITE_GEMINI_API_KEY as string | undefined;
   }, []);
 
   // ----- Persistent refs -----
