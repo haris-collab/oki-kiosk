@@ -3,13 +3,19 @@ import react from '@vitejs/plugin-react';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, process.cwd(), '');
+  // loadEnv reads .env files — used during local dev.
+  const fileEnv = loadEnv(mode, process.cwd(), '');
+  // Hosts like Netlify / Vercel inject env vars as actual process.env
+  // values, not .env files. Fall back to those at build time so the
+  // deployed bundle gets the real key.
+  const geminiKey = fileEnv.GEMINI_API_KEY || process.env.GEMINI_API_KEY || '';
+
   return {
     plugins: [react()],
     define: {
-      // Expose GEMINI key under both names so either works in code
-      'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
-      'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),
+      // Expose under both names for legacy import paths.
+      'process.env.GEMINI_API_KEY': JSON.stringify(geminiKey),
+      'process.env.API_KEY': JSON.stringify(geminiKey),
     },
     server: {
       host: true,
