@@ -1,0 +1,133 @@
+/* ============================================================
+   Oki Kiosk — base styles
+   Theme: Param's playful "thread" motif. Squiggly SVG paths
+   weave through a deep cream + ink palette inspired by
+   parsec-whitefield's hand-drawn springs and stars.
+============================================================ */
+
+:root {
+  --bg-cream: #faf2e3;       /* warm cream — primary background */
+  --bg-cream-deep: #f3e8d0;
+  --bg-ink: #11203c;         /* deep ink for inverted areas */
+  --bg-ink-soft: #1b2d51;
+
+  --ink-900: #11203c;
+  --ink-700: #2c3f63;
+  --ink-500: #5b6e8e;
+  --ink-300: #97a4be;
+
+  --thread-teal: #14b8a6;
+  --thread-purple: #8b5cf6;
+  --thread-pink: #ec4899;
+  --thread-coral: #ff6b3d;
+  --thread-yellow: #f5b041;
+
+  --paper: #ffffff;
+
+  --radius-pill: 999px;
+  --radius-card: 22px;
+  --radius-chip: 14px;
+
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  color: var(--ink-900);
+  background: var(--bg-cream);
+
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body, #root { height: 100%; overflow: hidden; }
+
+body {
+  background:
+    radial-gradient(800px 600px at 12% 8%,  rgba(245, 176, 65, 0.18), transparent 60%),
+    radial-gradient(900px 700px at 88% 92%, rgba(139, 92, 246, 0.18), transparent 60%),
+    radial-gradient(1000px 800px at 90% 12%, rgba(236, 72, 153, 0.12), transparent 60%),
+    radial-gradient(900px 700px at 10% 90%, rgba(20, 184, 166, 0.14), transparent 60%),
+    var(--bg-cream);
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:disabled { cursor: not-allowed; opacity: 0.55; }
+
+::selection { background: rgba(255, 107, 61, 0.25); }
+
+.display {
+  font-family: 'Fraunces', Georgia, 'Times New Roman', serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* ============================ */
+/*  Animations                  */
+/* ============================ */
+
+@keyframes oki-bob {
+  0%   { transform: translateY(0)    rotate(-2deg); }
+  50%  { transform: translateY(-12px) rotate(2deg); }
+  100% { transform: translateY(0)    rotate(-2deg); }
+}
+
+@keyframes oki-pulse {
+  0%   { transform: scale(1);   opacity: 0.55; }
+  100% { transform: scale(1.6); opacity: 0;    }
+}
+
+@keyframes thread-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes thread-flow {
+  to { stroke-dashoffset: -200; }
+}
+
+@keyframes chip-float-1 {
+  0%   { transform: translate(0, 0)       rotate(-3deg); }
+  50%  { transform: translate(6px, -8px)  rotate(-1deg); }
+  100% { transform: translate(0, 0)       rotate(-3deg); }
+}
+@keyframes chip-float-2 {
+  0%   { transform: translate(0, 0)       rotate(2deg);  }
+  50%  { transform: translate(-7px, -6px) rotate(4deg);  }
+  100% { transform: translate(0, 0)       rotate(2deg);  }
+}
+@keyframes chip-float-3 {
+  0%   { transform: translate(0, 0)        rotate(-1deg); }
+  50%  { transform: translate(5px, 7px)    rotate(1deg);  }
+  100% { transform: translate(0, 0)        rotate(-1deg); }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
+
+@keyframes splash-bob {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50%      { transform: translateY(-14px) rotate(3deg); }
+}
+
+@keyframes oki-tent-a {
+  0%, 100% { transform: rotate(-3deg) translateY(0); }
+  50%      { transform: rotate(3deg)  translateY(-2px); }
+}
+@keyframes oki-tent-b {
+  0%, 100% { transform: rotate(2deg)  translateY(0); }
+  50%      { transform: rotate(-2deg) translateY(-3px); }
+}
+@keyframes oki-bubble {
+  0%   { transform: translateY(0)    scale(1);   opacity: 0.7; }
+  50%  { transform: translateY(-14px) scale(1.1); opacity: 1;   }
+  100% { transform: translateY(-28px) scale(0.9); opacity: 0;   }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "oki-kiosk",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Oki the Octopus - Voice kiosk for ParSEC Whitefield (Param Foundation)",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --host",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@google/genai": "^1.32.0",
+    "@supabase/supabase-js": "^2.45.0",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^5.0.0",
+    "typescript": "~5.8.2",
+    "vite": "^6.2.0"
+  }
+}

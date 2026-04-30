@@ -1,0 +1,31 @@
+# ============================================================
+# Netlify deploy config for the Oki kiosk
+# ============================================================
+# Repo layout assumption: this `oki-kiosk/` folder is the GitHub
+# repo root (i.e., you pushed the contents of oki-kiosk/, not
+# the parent folder). If you instead push the parent folder,
+# uncomment the `base = "oki-kiosk"` line below.
+# ============================================================
+
+[build]
+  # base = "oki-kiosk"
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Single-page app — every route falls back to index.html.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Lock the mic-recording indicator behaviour and basic security headers.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "microphone=(self), camera=(), geolocation=()"
